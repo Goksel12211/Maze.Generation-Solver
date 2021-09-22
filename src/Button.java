@@ -17,34 +17,47 @@ public  Button(PApplet parent,int StarterX,int StarterY,int width,int height,int
     this.diff=diff;
     this.parent=parent; }
 
+
+     public void StartButtonDrawer(){
+         parent.fill(255, 87, 51);
+         parent.rect(StarterX,StarterY,width,height);
+         parent.fill(0);
+
+         parent.text("Start",StarterX+width/3,StarterY+height/3+10);
+
+     }
+
+     public void FinishButtonDrawer(){
+         parent.fill(144, 12, 63);
+         parent.rect(StarterX-diff,StarterY,width,height);
+         parent.fill(0);
+         parent.text("Finish",StarterX+width/3-diff,StarterY+height/3+10);
+
+
+
+     }
+ public void GenerateButtonDrawer(){
+
+     parent.fill(90, 24, 154);
+     parent.rect(StarterX-diff*2/3,StarterY+diff*2/3,width+diff/3,height);
+     parent.fill(255);
+     parent.text("Generate Maze",StarterX+width/3-diff*2/3,StarterY+height+10+diff/3);
+     parent.fill(255);
+
+
+ }
+     public void BlockButtonDrawer() {
+
+         parent.fill(88, 24, 69);
+         parent.rect(StarterX - diff * 2 / 3, StarterY + diff * 4 / 3, width + diff / 3, height * 2);
+         parent.fill(255);
+         parent.text("Blocks", StarterX - 20, StarterY + height * 10 / 3 + 10);
+     }
 public  void ButtonDrawer(){
-    parent.fill(255, 87, 51);
-  parent.rect(StarterX,StarterY,width,height);
-    parent.fill(0);
-
-    parent.text("Start",StarterX+width/3,StarterY+height/3+10);
-
-    parent.fill(144, 12, 63);
-    parent.rect(StarterX-diff,StarterY,width,height);
-    parent.fill(0);
-    parent.text("Finish",StarterX+width/3-diff,StarterY+height/3+10);
-
-
-
-    parent.fill(90, 24, 154);
-    parent.rect(StarterX-diff*2/3,StarterY+diff*2/3,width+diff/3,height);
-    parent.fill(255);
-    parent.text("Generate Maze",StarterX+width/3-diff*2/3,StarterY+height+10+diff/3);
-    parent.fill(255);
-
-
-    parent.fill(88, 24, 69 );
-    parent.rect(StarterX-diff*2/3,StarterY+diff*4/3,width+diff/3,height*2);
-    parent.fill(255);
-    parent.text("Blocks",StarterX-20,StarterY+height*10/3+10);
-
-
-
+    StartButtonDrawer();
+    FinishButtonDrawer();
+    GenerateButtonDrawer();
+    BlockButtonDrawer();
 }
 String   whichButtonPressed(){
 
