@@ -99,38 +99,32 @@ static ArrayList<Integer> EntryX = new ArrayList<Integer>();
     }
 
 
-
-
-
-
-
-
-
-
     private static int[] minVertex (int [][] dist, boolean [][] v) {
+        //StartValue
         int x = Integer.MAX_VALUE;
         int yy = -1;
         int xx=-1;
-        // graph not connected, or no unvisited vertices
-        for (int i=0; i<dist.length; i++) {
+         return findNextVertexminDistanceAndNotVisited(dist,v,xx,yy,x);
+    }
+
+    public static int[]findNextVertexminDistanceAndNotVisited(int [][] dist, boolean [][] v,int xx,int yy,int x){
+    for (int i=0; i<dist.length; i++) {
             for (int j=0; j<dist[0].length; j++) {
-
-
                 if (!v[i][j] && dist[i][j] < x) {
                     yy = i;
                     xx=j;
                     x = dist[i][j];
-
                 }
-
             }
-
         }
-        int dizi[]=new int[2];
-        dizi[0]=yy;
-        dizi[1]=xx;
-        return dizi;
+return createArrayForMinVertexRETURN(xx,yy);
     }
+public static int [] createArrayForMinVertexRETURN(int xx,int yy){
+    int dizi[]=new int[2];
+    dizi[0]=yy;
+    dizi[1]=xx;
+    return dizi;
+}
 
 public ArrayList<Integer> FinalPathFinder (int row,int column,int finalX,int finalY){
 
@@ -185,7 +179,7 @@ int miny =0;
                 miny = finalY;
                 sayacz = 1;
                 Path.add(minx);
-                Path.add(miny);ş
+                Path.add(miny);
             }
         if (finalY != column-1)
             if (distance[finalX][finalY + 1] == MIN && sayacz == 0) {
