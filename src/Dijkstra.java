@@ -19,84 +19,6 @@ static ArrayList<Integer> EntryX = new ArrayList<Integer>();
         this.map = map;
     }
 
-    public static void SolveDijkstra(String[][] MAP, int row, int column, int StartX, int StartY) {
-        distance = new int[row][column];
-        isVisited = new boolean[row][column];
-
-
-        for (int j = 0; j < row; j++) {
-            for (int i = 0; i < column; i++) {
-                isVisited[j][i] = false;
-                distance[j][i] = Integer.MAX_VALUE;
-            }
-        }
-
-
-        distance[StartX][StartY] = 0;
-        for (int i = 0; i < row * column; i++) {
-            int[] u = minVertex(distance, isVisited);
-            if (u[0] != -1) {
-                int minindexX = u[0];
-                int minindexY = u[1];
-                isVisited[minindexX][minindexY] = true;
-
-
-            EntryX.add(minindexX);
-            EntryY. add(minindexY);
-
-                //SAĞ KONTROL
-                if (minindexX != row - 1)
-                    if (distance[minindexX + 1][minindexY] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX+1][minindexY]) {
-
-                        if (!MAP[minindexX][minindexY].equals("BLOCK") && !MAP[minindexX + 1][minindexY].equals("BLOCK"))
-                            distance[minindexX+1][minindexY] = distance[minindexX][minindexY] + 1;
-
-
-                    }
-
-//SOL KONTROL
-
-                if (minindexX != 0)
-                    if (distance[minindexX-1][minindexY] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX-1][minindexY]) {
-
-
-                        if (!MAP[minindexX][minindexY].equals("BLOCK") && !MAP[minindexX - 1][minindexY].equals("BLOCK"))
-                            distance[minindexX-1][minindexY] = distance[minindexX][minindexY] + 1;
-                    }
-
-
-//YUKARI KONTROL
-
-                if (minindexY != 0) {
-                    if (distance[minindexX][minindexY-1] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX][minindexY- 1]) {
-                        {
-                            if (!MAP[minindexX][minindexY].equals("BLOCK") && !MAP[minindexX][minindexY - 1].equals("BLOCK")) {
-                                distance[minindexX][minindexY-1] = distance[minindexX][minindexY] + 1;
-                            }
-                        }
-                    }
-                }
-
-//AŞŞAĞI KONTROL
-
-                if (minindexY != column - 1)
-                    if (distance[minindexX][minindexY+1] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX][minindexY+1]) {
-                        if (!MAP[minindexX][minindexY + 1].equals("BLOCK") && !MAP[minindexX][minindexY].equals("BLOCK")) {
-
-                            distance[minindexX][minindexY+1] = distance[minindexX][minindexY] + 1;
-                        }
-
-                    }
-            }
-
-
-        }
-
-
-
-
-
-    }
 
 
     private static int[] minVertex (int [][] dist, boolean [][] v) {
@@ -104,11 +26,11 @@ static ArrayList<Integer> EntryX = new ArrayList<Integer>();
         int x = Integer.MAX_VALUE;
         int yy = -1;
         int xx=-1;
-         return findNextVertexminDistanceAndNotVisited(dist,v,xx,yy,x);
+        return findNextVertexminDistanceAndNotVisited(dist,v,xx,yy,x);
     }
 
     public static int[]findNextVertexminDistanceAndNotVisited(int [][] dist, boolean [][] v,int xx,int yy,int x){
-    for (int i=0; i<dist.length; i++) {
+        for (int i=0; i<dist.length; i++) {
             for (int j=0; j<dist[0].length; j++) {
                 if (!v[i][j] && dist[i][j] < x) {
                     yy = i;
@@ -117,8 +39,103 @@ static ArrayList<Integer> EntryX = new ArrayList<Integer>();
                 }
             }
         }
-return createArrayForMinVertexRETURN(xx,yy);
+        return createArrayForMinVertexRETURN(xx,yy);
     }
+
+
+    private static void arrangeVisitedFalseAndDistanceINFINITE(int row, int column,int StartX,int StartY){
+        for (int j = 0; j < row; j++) {
+            for (int i = 0; i < column; i++) {
+                isVisited[j][i] = false;
+                distance[j][i] = Integer.MAX_VALUE;
+            }
+        }
+        distance[StartX][StartY] = 0;
+
+    }
+
+private static void isNextNodeOnAroundAndItselfBLOCKForRIGHTIncreaseDistance(String[][] MAP,int minindexX,int minindexY,int rowOrColumn){
+
+    if (minindexX != rowOrColumn - 1)
+        if (distance[minindexX + 1][minindexY] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX+1][minindexY]) {
+
+            if (!MAP[minindexX][minindexY].equals("BLOCK") && !MAP[minindexX + 1][minindexY].equals("BLOCK"))
+                distance[minindexX+1][minindexY] = distance[minindexX][minindexY] + 1;
+
+
+        }
+}
+    private static void isNextNodeOnAroundAndItselfBLOCKForLEFTIncreaseDistance(String[][] MAP,int minindexX,int minindexY,int rowOrColumn){
+
+        if (minindexX != 0)
+            if (distance[minindexX-1][minindexY] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX-1][minindexY]) {
+
+
+                if (!MAP[minindexX][minindexY].equals("BLOCK") && !MAP[minindexX - 1][minindexY].equals("BLOCK"))
+                    distance[minindexX-1][minindexY] = distance[minindexX][minindexY] + 1;
+            }   }
+
+    private static void isNextNodeOnAroundAndItselfBLOCKForUPIncreaseDistance(String[][] MAP,int minindexX,int minindexY,int rowOrColumn) {
+
+        if (minindexY != 0) {
+            if (distance[minindexX][minindexY - 1] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX][minindexY - 1]) {
+                {
+                    if (!MAP[minindexX][minindexY].equals("BLOCK") && !MAP[minindexX][minindexY - 1].equals("BLOCK")) {
+                        distance[minindexX][minindexY - 1] = distance[minindexX][minindexY] + 1;
+                    }
+                }
+            }
+        }
+
+
+    }
+    private static void isNextNodeOnAroundAndItselfBLOCKForDOWNIncreaseDistance(String[][] MAP,int minindexX,int minindexY,int rowOrColumn) {
+
+
+        if (minindexY != rowOrColumn - 1)
+            if (distance[minindexX][minindexY+1] > distance[minindexX][minindexY] + 1 && !isVisited[minindexX][minindexY+1]) {
+        if (!MAP[minindexX][minindexY + 1].equals("BLOCK") && !MAP[minindexX][minindexY].equals("BLOCK")) {
+            distance[minindexX][minindexY+1] = distance[minindexX][minindexY] + 1;
+        }
+    }
+}
+
+
+
+    public static void SolveDijkstra(String[][] MAP, int row, int column, int StartX, int StartY) {
+        distance = new int[row][column];
+        isVisited = new boolean[row][column];
+        arrangeVisitedFalseAndDistanceINFINITE(row,column,StartX,StartY);
+
+        for (int i = 0; i < row * column; i++) {
+            int[] u = minVertex(distance, isVisited);
+            if (u[0] != -1) {
+                int minindexX = u[0];
+                int minindexY = u[1];
+                isVisited[minindexX][minindexY] = true;
+                checkAroundNodesAndIncreaseDistance(MAP,minindexX,minindexY,column);
+                addXAndYForEntry(minindexX,minindexY);
+            }
+        }
+    }
+
+    private static void addXAndYForEntry(int minindexX,int minindexY){
+        EntryX.add(minindexX);
+        EntryY. add(minindexY);
+    }
+
+    public static void checkAroundNodesAndIncreaseDistance(String[][] MAP, int minindexX, int minindexY, int rowOrColumn){
+        //checkRight
+        isNextNodeOnAroundAndItselfBLOCKForRIGHTIncreaseDistance(MAP,minindexX,minindexY,rowOrColumn);
+        //checkLEFT
+        isNextNodeOnAroundAndItselfBLOCKForLEFTIncreaseDistance(MAP,minindexX,minindexY,rowOrColumn);
+        //checkUP
+        isNextNodeOnAroundAndItselfBLOCKForUPIncreaseDistance(MAP,minindexX,minindexY,0);
+        //checkDOWN
+        isNextNodeOnAroundAndItselfBLOCKForDOWNIncreaseDistance(MAP,minindexX,minindexY,0);
+    }
+
+
 public static int [] createArrayForMinVertexRETURN(int xx,int yy){
     int dizi[]=new int[2];
     dizi[0]=yy;

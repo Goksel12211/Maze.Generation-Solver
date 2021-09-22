@@ -59,7 +59,7 @@ public  void ButtonDrawer(){
     GenerateButtonDrawer();
     BlockButtonDrawer();
 }
-String   whichButtonPressed(){
+public String   whichButtonPressed(){
 
     if( StarterX<parent.mouseX &&StarterX+width>parent.mouseX  && parent.mousePressed && parent.mouseY>StarterY && parent.mouseY<StarterY+height){
         buttonChoose="START";
