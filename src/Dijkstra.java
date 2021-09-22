@@ -114,12 +114,12 @@ private static void isNextNodeOnAroundAndItselfBLOCKForRIGHTIncreaseDistance(Str
                 int minindexY = u[1];
                 isVisited[minindexX][minindexY] = true;
                 checkAroundNodesAndIncreaseDistance(MAP,minindexX,minindexY,column);
-                addXAndYForEntry(minindexX,minindexY);
+                addminindexXAndminindexYForEntry(minindexX,minindexY);
             }
         }
     }
 
-    private static void addXAndYForEntry(int minindexX,int minindexY){
+    private static void addminindexXAndminindexYForEntry(int minindexX,int minindexY){
         EntryX.add(minindexX);
         EntryY. add(minindexY);
     }
@@ -143,6 +143,43 @@ public static int [] createArrayForMinVertexRETURN(int xx,int yy){
     return dizi;
 }
 
+
+
+
+private static int  findMinDistanceOnLastNode(int finalX,int finalY,int row,int column) {
+    int mesafe = distance[finalX][finalY];
+    int MIN = Integer.MAX_VALUE;
+
+    for (int k = 0; k < mesafe; k++) {
+
+        int l1 = Integer.MAX_VALUE, l2 = Integer.MAX_VALUE, l3 = Integer.MAX_VALUE, l4 = Integer.MAX_VALUE;
+        if (finalX != row - 1) {
+            l1 = distance[finalX + 1][finalY];
+            if (l1 < MIN)
+                MIN = l1;
+        }
+        if (finalX != 0) {
+            l2 = distance[finalX - 1][finalY];
+
+            if (l2 < MIN)
+                MIN = l2;
+
+        }
+
+        if (finalY != column - 1) {
+            l3 = distance[finalX][finalY + 1];
+            if (l3 < MIN)
+                MIN = l3;
+        }
+        if (finalY != 0) {
+            l4 = distance[finalX][finalY - 1];
+            if (l4 < MIN)
+                MIN = l4;
+        }
+
+    }
+    return MIN;
+    }
 public ArrayList<Integer> FinalPathFinder (int row,int column,int finalX,int finalY){
 
     ArrayList<Integer> Path=new ArrayList<Integer>();
@@ -221,16 +258,6 @@ int miny =0;
             finalY=miny;
 
     }
-
-
         return Path;
 }
-
-
-
-
-
-
-
-
 }

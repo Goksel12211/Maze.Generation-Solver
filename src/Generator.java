@@ -89,9 +89,8 @@ return randomsayi;
                 node.setY(node.getY() - 2);
                 node.addX(node.getX());
                 node.addY(node.getY());
+
                 MoveTheNode(MAP, node, row, column);
-
-
             }
         }
 
@@ -107,18 +106,11 @@ return randomsayi;
                 node.addY(node.getY());
 
                 MoveTheNode(MAP, node, row, column);
-
             }
-
         }
-
-
-
     }
 
-
     private static void ifDownBlocksetEMPTYforNextandItselfsNext(Node node,String[][] MAP,int currentDirection,int row,int column) {
-
 
         if (node.getY() < row - 2 && currentDirection == 2) {
             if (MAP[node.getX()][node.getY() + 2].equals("BLOCK")) {
@@ -128,14 +120,9 @@ return randomsayi;
                 node.addX(node.getX());
                 node.addY(node.getY());
                 MoveTheNode(MAP, node, row, column);
-
-
             }
         }
     }
-
-
-
 
     private static void ifLeftBlocksetEMPTYforNextandItselfsNext(Node node,String[][] MAP,int currentDirection,int row,int column){
 
@@ -186,14 +173,6 @@ public  static void ifListNotFinishedStepBack(String[][] MAP, Node node, int row
 
     }
     }
-
-
-
-
-
-
-
-
 
     public static boolean isRoadAvaiable(String[][] MAP, Node node, int row, int column){
 
